@@ -12,8 +12,13 @@ Vue.prototype.$store=store;
 Vue.prototype.$util = util;
 Vue.prototype.$request = request;
 
-import {Swipe, SwipeItem,Tabbar, TabbarItem,Lazyload,PullRefresh,List,Tab, Tabs,NavBar,SwipeCell,cellGroup} from 'vant';
-Vue.use(Swipe).use(SwipeItem).use(Tabbar).use(TabbarItem).use(Lazyload).use(PullRefresh).use(List).use(Tab).use(Tabs).use(NavBar).use(SwipeCell).use(cellGroup);
+import {Swipe, SwipeItem,Tabbar, TabbarItem,Lazyload,PullRefresh,List,Tab, Tabs,NavBar,SwipeCell,cellGroup,GoodsAction,GoodsActionBigBtn,
+GoodsActionMiniBtn} from 'vant';
+Vue.use(Swipe).use(SwipeItem).use(Tabbar).use(TabbarItem).use(PullRefresh).use(List).use(Tab).use(Tabs).use(NavBar).use(SwipeCell).use(cellGroup).use(GoodsAction).use(GoodsActionBigBtn).use(GoodsActionMiniBtn)
+.use(Lazyload,{
+  error: require("./assets/img/dproimg.png"),
+  loading: require("./assets/img/dproimg.png")
+});
 
 /* eslint-disable no-new */
 new Vue({

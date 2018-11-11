@@ -40,8 +40,7 @@ export default function request(url, data, method, load, cb) {
     }
 
     $axios.post(
-        mainUrl + url,
-        { params: data }
+        mainUrl + url,data
     )
         .then(function (res) {
             if (load == 1)Toast.clear();

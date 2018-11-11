@@ -1,8 +1,7 @@
 <template>
     <div>
-        <!-- <keep-alive> -->
-            <router-view/>
-        <!-- </keep-alive> -->
+
+        <router-view/>
         <van-tabbar v-model="active" @change="changeTab">
             <van-tabbar-item style="margin:0" to="/Store">
                 <span>商城</span>
@@ -34,6 +33,7 @@
 
 <script>
 export default {
+    name: 'Tab',
     data() {
         return {
             active: 0,

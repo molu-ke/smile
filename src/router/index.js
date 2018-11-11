@@ -59,5 +59,15 @@ export default new Router({
       name: 'Study',
       component: resolve => require(['@/components/pages/Study'], resolve),
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      // if (!from.meta.keepAlive) {
+      //   from.meta.edPosition = document.documentElement.scrollTop;
+      // }
+      return { x: 0, y: 0 }
+    }
+  }
 })

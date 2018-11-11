@@ -54,9 +54,11 @@
       </div>
       <swiper :options="swiperOption">
         <swiper-slide v-for=" (item ,index) in slideList" :key="index">
-            <div class="recommend-item">
-              <img  v-lazy="item.smallPic" :onerror="errorImg"
-                   class="item_img"/>
+            <div class="recommend-item"  
+                @click="jumpDetails(item.goodsId,item.platform)">
+              <img  :onerror="errorImg" class="item_img"
+                    v-lazy="item.smallPic?item.smallPic:'../../assets/img/dproimg.png'" 
+              />
               <div class='item_span'>
                 <div class='item_info'>{{item.goodsName}}</div>
                 <div class='item_price'>
@@ -94,6 +96,7 @@ import util from  "@/common/util.js"
 import goodsList from "@/components/component/goodsList";
 
 export default {
+  name: 'Store',
   data() {
     return {
       swiperOption: {
@@ -187,6 +190,18 @@ export default {
       this.beautyData();
       this.st=0;
       this.getData(100, 0);
+    },
+
+    //跳到详情页
+    jumpDetails(goodsId,platform){
+      this.$router.push({
+        name:"GoodsDetail",
+        query:{
+          goodsId:goodsId,
+          platform:platform
+        }
+        // params参数会被 忽略
+      })
     }
   },
   filters:{

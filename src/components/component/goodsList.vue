@@ -1,7 +1,8 @@
 <template>
   <div class="goodsList">
      <div  v-for="(item,index) in goodsList"  :key="index" 
-                  :class="'goodsbox flex-box mode'+mode">
+                  :class="'goodsbox flex-box mode'+mode"
+                  @click="jumpDetails(item.goodsId,item.platform)">
         <van-swipe-cell :right-width="60" :disabled="shopCar==0">
           <img class="img" v-lazy="item.smallPic" :onerror="errorImg"/>
           <div class="flex-one info">
@@ -79,6 +80,16 @@ export default {
     },
     onClose(index){
       this.$emit("delGoodsEvent",index);
+    },
+    jumpDetails(goodsId,platform){
+      this.$router.push({
+        name:"GoodsDetail",
+        query:{
+          goodsId:goodsId,
+          platform:platform
+        }
+        // params参数会被 忽略
+      })
     }
   },
   computed:{
