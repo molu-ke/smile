@@ -1,5 +1,5 @@
 {
-  "name": "perfect",
+  "name": "Smile",
   "version": "1.0.0",
   "description": "百年+饿了么+微笑商城",
   "author": "lg <403398543@qq.com>",
@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "better-scroll": "^1.13.2",
+    "nativeshare": "^2.1.3",
     "vant": "^1.3.10",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",

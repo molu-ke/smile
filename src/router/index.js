@@ -6,7 +6,8 @@ import Classification from '@/components/pages/Classification'
 import ShopCar from '@/components/pages/ShopCar'
 import Home from '@/components/pages/Home'
 import GoodsDetail from '@/components/pages/goodsDetail'
-import Study from '@/components/pages/Study'
+import VuesetStudy from '@/components/pages/VuesetStudy'
+import List from '@/components/pages/List'
 
 Vue.use(Router)
 
@@ -53,11 +54,17 @@ export default new Router({
       name: 'GoodsDetail',
       component: resolve => require(['@/components/pages/goodsDetail'], resolve),
     },
-    //自己用于学习的页面
+    //商品列表
     {
-      path: '/Study',
-      name: 'Study',
-      component: resolve => require(['@/components/pages/Study'], resolve),
+      path: '/List',
+      name: 'List',
+      component: resolve => require(['@/components/pages/List'], resolve),
+    },
+    //学习vueset的用法
+    {
+      path: '/VuesetStudy',
+      name: 'VuesetStudy',
+      component: resolve => require(['@/components/pages/VuesetStudy'], resolve),
     }
   ],
   scrollBehavior(to, from, savedPosition) {

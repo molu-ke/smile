@@ -2,7 +2,7 @@
     <div>
 
         <router-view/>
-        <van-tabbar v-model="active" @change="changeTab">
+        <van-tabbar v-model="active" @change="changeTab" :z-index="index">
             <van-tabbar-item style="margin:0" to="/Store">
                 <span>商城</span>
                 <img
@@ -37,6 +37,7 @@ export default {
     data() {
         return {
             active: 0,
+            index:10,
             iconStore: {
                 normal: require('../../assets/img/foot_m1.png'),
                 active: require('../../assets/img/foot_s1.png')

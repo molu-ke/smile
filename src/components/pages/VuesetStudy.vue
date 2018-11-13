@@ -1,5 +1,6 @@
 <template>
     <div class="study">
+        Vue.set的用法
         <div v-for="item in arrayList" :key="item.name">
            {{item.id}}---- {{item.name}}
         </div>
@@ -11,6 +12,7 @@
 
 <script>
     export default {
+        name:'VuesetStudy',
         data(){
             return{
                 arrayList:[

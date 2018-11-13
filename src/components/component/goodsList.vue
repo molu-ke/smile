@@ -319,6 +319,7 @@ export default {
 
 .goodsbox.mode3-1-0-5 .info {
   padding: 0.12rem 0 0.2rem 0.2rem;
+  width:100%;
 }
 
 .goodsbox.mode3-1-0-5 .quanSales {

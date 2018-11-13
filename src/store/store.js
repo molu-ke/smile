@@ -54,9 +54,13 @@ let store = new Vuex.Store({
     // 4. mutations
     mutations:{
         // state指的是state的数据
-        // name传递过来的数据
-        setCity(state, name){
-            state.city = name;//将传参设置给state的city
+        // idx传递过来的数据
+        change(state, idx){
+            if(idx==0){
+                state.mode='3-1-0-5';
+            }else if(idx==1){
+                state.mode='3-1-0-6';
+            }
         }
     }
 });

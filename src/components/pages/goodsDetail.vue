@@ -82,16 +82,20 @@
           text="首页"  @click="jumpPage(0)"/>
         <van-goods-action-mini-btn icon="cart" 
           text="购物车" @click="jumpPage(1)"/>
-        <van-goods-action-mini-btn icon="shop" text="分享" />
+        <van-goods-action-mini-btn icon="shop" text="分享"  @click="shareButton"/>
         <van-goods-action-big-btn text="加入购物车" @click="addShopCar"/>
         <van-goods-action-big-btn text="立即购买" primary @click="buy"/>
       </van-goods-action>
     </div>
+
+    <!-- 分享面板 -->
+    <share :isShow="isShow" :goodsInfo="goodsInfo"  @csPanelEvent="shareButton"></share>
   </div>
 </template>
 
 <script>
 import util from "@/common/util.js";
+import share from "@/components/component/share";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
 export default {
@@ -103,6 +107,7 @@ export default {
       goodsInfo:'none',
       guessList:[],
       errorImg:'this.src="'+require('@/assets/img/errorimg.png')+'"',
+      isShow:false
     }
   },
   methods: {
@@ -193,6 +198,19 @@ export default {
       this.getData(1);
     },
 
+     //弹出分享面板
+    shareButton(){
+       if (util.isWeiXin) {
+        this.$toast({
+          duration: 3000, // 持续展示 toast
+          forbidClick: true, // 禁用背景点击
+          message:"请点击右上角三个圆点进行分享"
+        });
+        return;
+      }
+      this.isShow=!this.isShow;
+    },
+
     //返回上一级
     onClickLeft() {
       this.$router.go(-1);
@@ -201,6 +219,7 @@ export default {
   components: {
     swiper,
     swiperSlide,
+    share
   },
   created(){
     this.getData(0);
@@ -429,6 +448,6 @@ export default {
   margin-right:0.3rem;
 }
 .van-goods-action{
-  z-index:1000
+  z-index:10
 }
 </style>
