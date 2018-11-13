@@ -186,7 +186,6 @@ export default {
 
     //跳到详情页
     jumpDetails(goodsId,platform){
-      console.log(23)
       this.$router.replace({
         name:"GoodsDetail",
         query:{
@@ -200,7 +199,7 @@ export default {
 
      //弹出分享面板
     shareButton(){
-       if (util.isWeiXin) {
+       if (util.isWeiXin()) {
         this.$toast({
           duration: 3000, // 持续展示 toast
           forbidClick: true, // 禁用背景点击
