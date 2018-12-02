@@ -8,6 +8,7 @@ import Home from '@/components/pages/Home'
 import GoodsDetail from '@/components/pages/goodsDetail'
 import VuesetStudy from '@/components/pages/VuesetStudy'
 import List from '@/components/pages/List'
+import Test from '@/components/pages/Test'
 
 Vue.use(Router)
 
@@ -17,7 +18,7 @@ export default new Router({
       path: '/',
       name: 'Tab',
       component: resolve => require(['@/components/pages/Tab'], resolve),
-      children:[
+      children: [
         //商城
         {
           path: '/',
@@ -65,6 +66,12 @@ export default new Router({
       path: '/VuesetStudy',
       name: 'VuesetStudy',
       component: resolve => require(['@/components/pages/VuesetStudy'], resolve),
+    },
+    //测试页面
+    {
+      path: '/Test',
+      name: 'Test',
+      component: resolve => require(['@/components/pages/Test'], resolve),
     }
   ],
   scrollBehavior(to, from, savedPosition) {

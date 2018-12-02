@@ -1,112 +1,138 @@
 <template>
-  <div class="index"> 
+  <div class="index">
     <!--顶部搜索框-->
     <div class='inp_box'>
-        <img :src="user.headImg" class='userimg'/>
-        <div class='seekbox'>
-        <img src='../../assets/img/seekbox.png'  @click="sendSeek()"/>
-        <input class='inp_search' placeholder="搜索宝贝、领券省钱、分享赚钱"   v-model="sendMsg" />
-        <div v-if="showDelCont" class="delete" @click="delCont()"></div>
-        </div>
-        <div class="indexShare" @click="shareButton">分享</div>
-    </div>
-    <van-pull-refresh v-model="isLoading" @refresh="pullDown">
-    <!-- 轮播 -->
-    <van-swipe :autoplay="3000"  class="swiper">
-      <van-swipe-item v-for="(item, index) in bannerList" :key="index">
-        <img v-lazy="item.img" width="100%" />
-      </van-swipe-item>
-    </van-swipe>
-
-    <!-- 第一层 -->
-   <div class="g-navbox1 clearfloat">
-        <div class="mo_nav" @click='list(2,"9块9")'>
-        <img src="../../assets/img/nav1.png" />
-        <span>9块9</span>
-        </div>
-        <div class="mo_nav"  @click='list(7,"限时秒杀")'>
-        <img src="../../assets/img/nav2.png" alt="" />
-        <span>限时秒杀</span>
-        </div>
-        <div class="mo_nav" @click='list(9,"高额佣金")'>
-        <img src="../../assets/img/nav3.png" alt="" />
-        <span>高额佣金</span>
-        </div>
-        <div class="mo_nav"  @click='list(10,"超级券")'>
-        <img src="../../assets/img/nav4.png" alt="" />
-        <span>超级券</span>
-        </div>
-        <div class="mo_nav" @click='list(8,"今日榜单")'>
-        <img src="../../assets/img/nav5.png" alt="" />
-        <span>今日榜单</span>
-        </div>
-    </div>
-    <!-- 第三层 -->
-    <div class="g-navbox3"  @click='list(9,"人气爆款")' >
-      <img  src="../../assets/img/infantMom.png"/>
-    </div>
-    <!-- 第四层 -->
-    <div class='scan_more g-navbox4'>
-      <!--信息  -->
-      <div class='head_box'>
-        <span class='goods_type'>美妆护肤</span>
-        <span class='look_more' @click='list(16,"美妆护肤")'>查看更多</span>
+      <img :src="user.headImg"
+        class='userimg' />
+      <div class='seekbox'>
+        <img src='../../assets/img/seekbox.png'
+          @click="sendSeek()" />
+        <input class='inp_search'
+          placeholder="搜索宝贝、领券省钱、分享赚钱"
+          v-model="sendMsg" />
+        <div v-if="showDelCont"
+          class="delete"
+          @click="delCont()"></div>
       </div>
-      <swiper :options="swiperOption">
-        <swiper-slide v-for=" (item ,index) in slideList" :key="index">
-            <div class="recommend-item"  
-                @click="jumpDetails(item.goodsId,item.platform)">
-              <img  :onerror="errorImg" class="item_img"
-                    v-lazy="item.smallPic?item.smallPic:'../../assets/img/dproimg.png'" 
-              />
+      <div class="indexShare"
+        @click="shareButton">分享</div>
+    </div>
+    <van-pull-refresh v-model="isLoading"
+      @refresh="pullDown">
+      <!-- 轮播 -->
+      <van-swipe :autoplay="3000"
+        class="swiper">
+        <van-swipe-item v-for="(item, index) in bannerList"
+          :key="index">
+          <img v-lazy="item.img"
+            width="100%" />
+        </van-swipe-item>
+      </van-swipe>
+
+      <!-- 第一层 -->
+      <div class="g-navbox1 clearfloat">
+        <div class="mo_nav"
+          @click='list(2,"9块9")'>
+          <img src="../../assets/img/nav1.png" />
+          <span>9块9</span>
+        </div>
+        <div class="mo_nav"
+          @click='list(7,"限时秒杀")'>
+          <img src="../../assets/img/nav2.png"
+            alt="" />
+          <span>限时秒杀</span>
+        </div>
+        <div class="mo_nav"
+          @click='list(9,"高额佣金")'>
+          <img src="../../assets/img/nav3.png"
+            alt="" />
+          <span>高额佣金</span>
+        </div>
+        <div class="mo_nav"
+          @click='list(10,"超级券")'>
+          <img src="../../assets/img/nav4.png"
+            alt="" />
+          <span>超级券</span>
+        </div>
+        <div class="mo_nav"
+          @click='list(8,"今日榜单")'>
+          <img src="../../assets/img/nav5.png"
+            alt="" />
+          <span>今日榜单</span>
+        </div>
+      </div>
+      <!-- 第三层 -->
+      <div class="g-navbox3"
+        @click='list(9,"人气爆款")'>
+        <img src="../../assets/img/infantMom.png" />
+      </div>
+      <!-- 第四层 -->
+      <div class='scan_more g-navbox4'>
+        <!--信息  -->
+        <div class='head_box'>
+          <span class='goods_type'>美妆护肤</span>
+          <span class='look_more'
+            @click='list(16,"美妆护肤")'>查看更多</span>
+        </div>
+        <swiper :options="swiperOption">
+          <swiper-slide v-for=" (item ,index) in slideList"
+            :key="index">
+            <div class="recommend-item"
+              @click="jumpDetails(item.goodsId,item.platform)">
+              <img :onerror="errorImg"
+                class="item_img"
+                v-lazy="item.smallPic?item.smallPic:'../../assets/img/dproimg.png'" />
               <div class='item_span'>
                 <div class='item_info'>{{item.goodsName}}</div>
                 <div class='item_price'>
-                <span class='dis_price'>
-                  ￥<span>{{item.endPrice|moneyFilter(2)}}</span> 
-                </span>
-                <span class='price'>￥<span>{{item.price|moneyFilter(2)}}</span> </span>
+                  <span class='dis_price'>
+                    ￥
+                    <span>{{item.endPrice|moneyFilter(2)}}</span>
+                  </span>
+                  <span class='price'>￥
+                    <span>{{item.price|moneyFilter(2)}}</span>
+                  </span>
                 </div>
               </div>
             </div>
-        </swiper-slide>
-      </swiper>
-    </div> 
-    <!--第五层  精品推荐-->
-    <div class="layout5">
+          </swiper-slide>
+        </swiper>
+      </div>
+      <!--第五层  精品推荐-->
+      <div class="layout5">
         <div class="navTitle">精品推荐</div>
-        <van-list
-          v-model="loading"
+        <van-list v-model="loading"
           :finished="finished"
-          @load="pullUp"
-        >
-          <goodsList  :goodsList="goodsList"></goodsList>
+          @load="pullUp">
+          <goodsList :goodsList="goodsList"></goodsList>
         </van-list>
-    </div>
-    <div class="bottom" v-show="finished">----我是有底线的----</div>
-     </van-pull-refresh>
+      </div>
+      <div class="bottom"
+        v-show="finished">----我是有底线的----</div>
+    </van-pull-refresh>
 
-     <!-- 分享面板 -->
-    <share :isShow="isShow" @csPanelEvent="shareButton"></share>
+    <!-- 分享面板 -->
+    <share :isShow="isShow"
+      @csPanelEvent="shareButton"></share>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-import "swiper/dist/css/swiper.css";
-import util from "@/common/util.js";
-import goodsList from "@/components/component/goodsList";
-import share from "@/components/component/share";
+import { mapState } from 'vuex'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+import util from '@/common/util.js'
+import goodsList from '@/components/component/goodsList'
+import share from '@/components/component/share'
 
 export default {
-  name: "Store",
+  name: 'Store',
   data() {
     return {
       swiperOption: {
         slidesPerView: 3.4
       },
-      errorImg: 'this.src="' + require("@/assets/img/errorimg.png") + '"',
+      errorImg: 'this.src="' + require('@/assets/img/errorimg.png') + '"',
       loading: false,
       finished: false,
       st: 0,
@@ -114,10 +140,10 @@ export default {
       bannerList: [],
       slideList: [],
       goodsList: [],
-      sendMsg: "",
+      sendMsg: '',
       showDelCont: false,
       isShow: false
-    };
+    }
   },
 
   components: {
@@ -127,11 +153,11 @@ export default {
     share
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(['user'])
   },
   created() {
-    this.getAdvert();
-    this.beautyData();
+    this.getAdvert()
+    this.beautyData()
   },
 
   methods: {
@@ -139,83 +165,83 @@ export default {
     getAdvert: function() {
       let pams = {
         categoryId: 1,
-        deviceId: "/mini"
-      };
-      this.$request("advert/list", pams, "GET", 0, res => {
-        this.bannerList = res.list;
-      });
+        deviceId: '/mini'
+      }
+      this.$request('advert/list', pams, 'GET', 0, res => {
+        this.bannerList = res.list
+      })
     },
     //美妆护肤
     beautyData: function() {
       let pams = {
         catId: 16,
         st: 1
-      };
-      this.$request("pdd/goods/list", pams, "GET", 0, res => {
-        this.slideList = res.list;
-      });
+      }
+      this.$request('pdd/goods/list', pams, 'GET', 0, res => {
+        this.slideList = res.list
+      })
     },
 
     //商品例表
     getData: function(page, load) {
-      let that = this;
+      let that = this
       let pams = {
         themeId: 1,
         st: this.st,
-        deviceId: "/mini"
-      };
-      this.$request("pdd/goods/list", pams, "GET", load, res => {
+        deviceId: '/mini'
+      }
+      this.$request('pdd/goods/list', pams, 'GET', load, res => {
         if (res.list.length == 0 && page == 99) {
-          this.loading = false;
-          this.finished = true;
-          return;
+          this.loading = false
+          this.finished = true
+          return
         } else if (res.list.length == 0 && page == 100) {
-          this.isLoading = false;
+          this.isLoading = false
         }
-        this.loading = false;
+        this.loading = false
         if (page == 99) {
-          this.goodsList = this.goodsList.concat(res.list);
+          this.goodsList = this.goodsList.concat(res.list)
         } else {
-          this.isLoading = false;
-          this.goodsList = res.list;
+          this.isLoading = false
+          this.goodsList = res.list
         }
-      });
+      })
     },
     //上拉加载
     pullUp: function() {
-      this.st++;
-      this.getData(99, 0);
+      this.st++
+      this.getData(99, 0)
     },
 
     //下拉刷新
     pullDown() {
-      this.getAdvert();
-      this.beautyData();
-      this.st = 0;
-      this.getData(100, 0);
+      this.getAdvert()
+      this.beautyData()
+      this.st = 0
+      this.getData(100, 0)
     },
 
     //跳到详情页
     jumpDetails(goodsId, platform) {
       this.$router.push({
-        name: "GoodsDetail",
+        name: 'GoodsDetail',
         query: {
           goodsId: goodsId,
           platform: platform
         }
         // params参数会被 忽略
-      });
+      })
     },
 
     //跳到商品列表
     list(themeId, title) {
       this.$router.push({
-        name: "List",
+        name: 'List',
         query: {
           themeId: themeId,
           title: title
         }
-      });
+      })
     },
 
     //弹出分享面板
@@ -224,19 +250,19 @@ export default {
         this.$toast({
           duration: 3000, // 持续展示 toast
           forbidClick: true, // 禁用背景点击
-          message:"请点击右上角三个圆点进行分享"
-        });
-        return;
+          message: '请点击右上角三个圆点进行分享'
+        })
+        return
       }
-      this.isShow = !this.isShow;
+      this.isShow = !this.isShow
     }
   },
   filters: {
     moneyFilter(number, int) {
-      return util.moneyFilter(number, int);
+      return util.moneyFilter(number, int)
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -250,7 +276,7 @@ export default {
   right: 0.18rem;
   top: 0.19rem;
   z-index: 20;
-  background: url("../../assets/img/del.png") no-repeat;
+  background: url('../../assets/img/del.png') no-repeat;
   background-size: 0.34rem;
 }
 
@@ -353,7 +379,7 @@ export default {
   width: 0.68rem;
   height: 0.68rem;
   color: gray;
-  background: url("../../assets/img/ico_share.png") no-repeat top center;
+  background: url('../../assets/img/ico_share.png') no-repeat top center;
   background-size: 0.38rem 0.38rem;
 }
 
@@ -517,7 +543,7 @@ export default {
 .g-navbox4 .head_box {
   font-size: 0;
   margin: 0.2rem 0.3rem;
-  background: #fff url("../../assets/img/ioc_index_arraw.png") no-repeat right
+  background: #fff url('../../assets/img/ioc_index_arraw.png') no-repeat right
     center;
   background-size: 0.1rem 0.2rem;
 }
@@ -594,7 +620,7 @@ export default {
   line-height: 0.88rem;
   font-size: 0.35rem;
   border-bottom: 0.1rem solid #f5f5f5;
-  background: #fff url("../../assets/img/ico_index_bg.png") no-repeat 47% 62%;
+  background: #fff url('../../assets/img/ico_index_bg.png') no-repeat 47% 62%;
   background-size: 2.7rem 0.38rem;
 }
 
