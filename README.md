@@ -1,30 +1,9 @@
-# perfect
+# 百年+饿了么+微笑商城
 
-> 百年+饿了么+微笑商城
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 实现功能
+* 路由懒加载
+* 登录拦截(借用axios拦截器、路由全局守卫)
+* 图片懒加载
+* better-scroll插件实现楼层滚动
+* babel-polyfill插件把vuex中的promise兼容到ie
+* 目前只兼容到ie11，还在进一步兼容中
